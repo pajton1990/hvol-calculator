@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HV Line Sequence Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>HV Line and Cable Parameter Calculator</h1>
+        <p>50 Hz, 1 km sequence parameter calculator</p>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel controls">
+        <h2>Inputs</h2>
+
+        <div class="field-row">
+          <label for="lineType">Line type</label>
+          <select id="lineType">
+            <option value="overhead">Overhead line</option>
+            <option value="cable">Underground cable</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <label for="csvFile">Upload CSV</label>
+          <input id="csvFile" type="file" accept=".csv,text/csv" />
+        </div>
+
+        <div class="button-row">
+          <button id="calculateBtn" type="button">Calculate</button>
+          <button id="templateBtn" type="button" class="secondary">Download template</button>
+          <button id="sampleBtn" type="button" class="secondary">Download sample</button>
+        </div>
+
+        <div class="notes">
+          <h3>Accepted CSV patterns</h3>
+          <ul>
+            <li>Overhead: phase positions as <code>phase_positions_m</code> or individual x/y fields.</li>
+            <li>Cable: phase positions as <code>phase_positions_m</code> and optional <code>ecc_positions_m</code>.</li>
+            <li>Use columns with names such as <code>conductor_area_mm2</code>, <code>conductor_diameter_mm</code>, <code>conductor_material</code>, <code>phase_positions_m</code>, <code>earth_positions_m</code>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel output">
+        <div class="output-header">
+          <h2>Results</h2>
+          <button id="downloadCsvBtn" type="button" class="secondary">Export CSV</button>
+        </div>
+
+        <div class="table-wrap">
+          <table id="resultTable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

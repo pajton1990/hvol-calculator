@@ -1,0 +1,59 @@
+# HV Overhead and Cable Calculator
+
+A small web app for calculating approximate positive-/zero-sequence line parameters for 50 Hz high-voltage overhead lines and underground cables.
+
+## Features
+
+- Upload a CSV file of line or cable cases
+- Supports overhead line and cable modes
+- Calculates approximate per-km values for:
+  - R1 and R0
+  - X1 and X0
+  - B1 and B0
+- Exports the result table as CSV
+- Includes CSV templates and sample data
+
+## How to run locally
+
+1. Open the repository folder.
+2. Start a simple local web server:
+
+```bash
+python -m http.server 8000
+```
+
+3. Open this URL in a browser:
+
+```text
+http://localhost:8000
+```
+
+## Notes on the formulas
+
+This calculator uses standard engineering approximations for 50 Hz systems. It is intended to support concept design and preliminary calculations, not to replace a full power-system software package or a utility-specific engineering model.
+
+For overhead lines, the calculator estimates sequence reactance from geometry and approximate capacitance from conductor geometry.
+
+For cables, the calculator estimates sequence resistance, inductive reactance and susceptance using conductor material, dimensions and spacing assumptions.
+
+## CSV format
+
+### Overhead-line example
+
+```csv
+line_name,phase_positions_m,earth_positions_m,conductor_material,conductor_area_mm2,conductor_diameter_mm,conductor_resistivity_ohm_mm2_per_m,phase_diameters_mm,earth_diameters_mm
+Line A,"0,0; 7,0; 14,0","3.5,8; 10.5,8",Cu,500,12.5,0.01724,12.5,12.5
+```
+
+### Cable example
+
+```csv
+line_name,cable_type,conductor_material,conductor_area_mm2,conductor_diameter_mm,phase_positions_m,return_wire_area_mm2,return_wire_material,ecc_positions_m
+Cable A,BE,Cu,500,12.5,"0,0; 0.12,0; 0.24,0",160,Cu,"0.08,0; 0.18,0"
+```
+
+## Disclaimer
+
+The formulas are approximate and provide engineering estimates for a preliminary design workflow.
+
+For utility-grade design, please validate against project specifications, manufacturer data, and existing network software.
